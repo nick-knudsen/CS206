@@ -9,7 +9,8 @@ p.setAdditionalSearchPath(pybullet_data.getDataPath())
 p.setGravity(0,0,-9.8)
 # adding a floor
 planeId = p.loadURDF("plane.urdf")
-p.loadSDF("boxes.sdf")
+robotId = p.loadURDF("body.urdf")
+p.loadSDF("world.sdf")
 # simulation stepper
 for i in range(5000):
     p.stepSimulation()
