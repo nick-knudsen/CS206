@@ -3,6 +3,7 @@ import time
 
 # create the GUI
 physicsClient = p.connect(p.GUI)
+p.loadSDF("box.sdf")
 # simulation stepper
 for i in range(5000):
     p.stepSimulation()
