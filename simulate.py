@@ -5,7 +5,7 @@ import time
 import numpy as np
 
 # constants
-SIMULATION_STEPS = 1000
+SIMULATION_STEPS = 400
 
 # create the GUI
 physicsClient = p.connect(p.GUI)
