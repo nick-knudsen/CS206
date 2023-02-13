@@ -3,6 +3,7 @@ import pyrosim.pyrosim as pyrosim
 import pybullet_data
 import time
 import numpy as np
+import math
 
 # constants
 SIMULATION_STEPS = 1000
@@ -28,7 +29,14 @@ for i in range(SIMULATION_STEPS):
         bodyIndex = robotId,
         jointName = b'Torso_BackLeg',
         controlMode = p.POSITION_CONTROL,
-        targetPosition = 0.0,
+        targetPosition = -math.pi/6.0,
+        maxForce = 500
+    )
+    pyrosim.Set_Motor_For_Joint(
+        bodyIndex = robotId,
+        jointName = b'Torso_FrontLeg',
+        controlMode = p.POSITION_CONTROL,
+        targetPosition = math.pi/6.0,
         maxForce = 500
     )
     p.stepSimulation()
