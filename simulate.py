@@ -22,7 +22,7 @@ simulation.Run()
 # PHASE_OFFSET_BACK = c.PHASE_OFFSET_BACK
 
 
-# backLegSensorValues = np.zeros(SIMULATION_STEPS)
+# 
 # frontLegSensorValues = np.zeros(SIMULATION_STEPS)
 # targetAnglesFront = AMPLITUDE_FRONT*np.sin(np.linspace(0+PHASE_OFFSET_FRONT,2*pi*FREQUENCY_FRONT+PHASE_OFFSET_FRONT, SIMULATION_STEPS))
 # targetAnglesBack = AMPLITUDE_BACK*np.sin(np.linspace(0+PHASE_OFFSET_BACK,2*pi*FREQUENCY_BACK+PHASE_OFFSET_BACK, SIMULATION_STEPS))

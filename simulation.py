@@ -19,8 +19,6 @@ class SIMULATION:
         self.world = WORLD()
         self.robot = ROBOT()
 
-        pyrosim.Prepare_To_Simulate(self.robot.robotId)
-
     def Run(self):
         # # simulation stepper
         for i in range(c.SIMULATION_STEPS):
