@@ -1,3 +1,5 @@
+from math import pi
+
 # constants
 SIMULATION_STEPS = 1000
 AMPLITUDE_FRONT = pi/16
