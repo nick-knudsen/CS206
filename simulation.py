@@ -1,6 +1,5 @@
 import pybullet as p
 import pybullet_data
-import pyrosim.pyrosim as pyrosim
 import time
 
 from world import WORLD
@@ -21,10 +20,9 @@ class SIMULATION:
 
     def Run(self):
         # # simulation stepper
-        for i in range(c.SIMULATION_STEPS):
-            print(i)
-            # backLegSensorValues[i] = pyrosim.Get_Touch_Sensor_Value_For_Link("BackLeg")
-            # frontLegSensorValues[i] = pyrosim.Get_Touch_Sensor_Value_For_Link("FrontLeg")
+        for timestep in range(c.SIMULATION_STEPS):
+            #print(timestep)
+
             # pyrosim.Set_Motor_For_Joint(
             #     bodyIndex = robotId,
             #     jointName = b'Torso_BackLeg',
@@ -40,6 +38,7 @@ class SIMULATION:
             #     maxForce = 500
             # )
             p.stepSimulation()
+            self.robot.Sense(timestep)
             time.sleep(0.01)
     
     def __del__(self):
