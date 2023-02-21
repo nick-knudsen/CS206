@@ -43,3 +43,6 @@ class SIMULATION:
             # )
             p.stepSimulation()
             time.sleep(0.01)
+    
+    def __del__(self):
+        p.disconnect()
