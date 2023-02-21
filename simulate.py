@@ -5,15 +5,9 @@ import time
 import numpy as np
 from math import pi
 import random
+import constants as c
 
-# constants
-SIMULATION_STEPS = 1000
-AMPLITUDE_FRONT = pi/16
-FREQUENCY_FRONT = 20
-PHASE_OFFSET_FRONT = pi/16
-AMPLITUDE_BACK = pi/16
-FREQUENCY_BACK = 20
-PHASE_OFFSET_BACK = 0
+
 
 # create the GUI
 physicsClient = p.connect(p.GUI)
