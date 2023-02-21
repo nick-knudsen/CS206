@@ -25,3 +25,6 @@ class MOTOR:
             targetPosition = self.motorValues[timestep],
             maxForce = 500
         )
+    
+    def Save_Values(self):
+        np.save("data/targetAngles" + self.jointName + ".npy", self.motorValues)
