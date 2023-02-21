@@ -22,10 +22,22 @@ simulation.Run()
 # PHASE_OFFSET_BACK = c.PHASE_OFFSET_BACK
 
 
-# 
+# pyrosim.Set_Motor_For_Joint(
+        #     bodyIndex = robotId,
+        #     jointName = b'Torso_BackLeg',
+        #     controlMode = p.POSITION_CONTROL,
+        #     targetPosition = targetAnglesBack[i],
+        #     maxForce = 500
+        # )
+        # pyrosim.Set_Motor_For_Joint(
+        #     bodyIndex = robotId,
+        #     jointName = b'Torso_FrontLeg',
+        #     controlMode = p.POSITION_CONTROL,
+        #     targetPosition = targetAnglesFront[i],
+        #     maxForce = 500
+
 # frontLegSensorValues = np.zeros(SIMULATION_STEPS)
-# targetAnglesFront = AMPLITUDE_FRONT*np.sin(np.linspace(0+PHASE_OFFSET_FRONT,2*pi*FREQUENCY_FRONT+PHASE_OFFSET_FRONT, SIMULATION_STEPS))
-# targetAnglesBack = AMPLITUDE_BACK*np.sin(np.linspace(0+PHASE_OFFSET_BACK,2*pi*FREQUENCY_BACK+PHASE_OFFSET_BACK, SIMULATION_STEPS))
+
 
 # #np.save("data/targetAnglesFront.npy", targetAnglesFront)
 # #np.save("data/targetAnglesBack.npy", targetAnglesBack)

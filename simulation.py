@@ -22,21 +22,6 @@ class SIMULATION:
         # # simulation stepper
         for timestep in range(c.SIMULATION_STEPS):
             #print(timestep)
-
-            # pyrosim.Set_Motor_For_Joint(
-            #     bodyIndex = robotId,
-            #     jointName = b'Torso_BackLeg',
-            #     controlMode = p.POSITION_CONTROL,
-            #     targetPosition = targetAnglesBack[i],
-            #     maxForce = 500
-            # )
-            # pyrosim.Set_Motor_For_Joint(
-            #     bodyIndex = robotId,
-            #     jointName = b'Torso_FrontLeg',
-            #     controlMode = p.POSITION_CONTROL,
-            #     targetPosition = targetAnglesFront[i],
-            #     maxForce = 500
-            # )
             p.stepSimulation()
             self.robot.Sense(timestep)
             time.sleep(0.01)
