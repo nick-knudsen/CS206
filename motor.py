@@ -15,6 +15,10 @@ class MOTOR:
         self.frequency = c.FREQUENCY_FRONT
         self.offset = c.PHASE_OFFSET_FRONT
 
+        print(self.jointName)
+        if self.jointName == b'Torso_BackLeg':
+            print("test")
+            self.frequency = 2*self.frequency
         self.motorValues = self.amplitude*np.sin(np.linspace(0+self.offset,2*pi*self.frequency+self.offset, c.SIMULATION_STEPS))
         
     def Set_Value(self, robotId, timestep):
