@@ -24,7 +24,7 @@ class SIMULATION:
             #print(timestep)
             p.stepSimulation()
             self.robot.Sense(timestep)
-            self.robot.Act()
+            self.robot.Act(self.robot.robotId, timestep)
             time.sleep(0.01)
     
     def __del__(self):

@@ -27,6 +27,6 @@ class ROBOT:
         for jointName in pyrosim.jointNamesToIndices:
             self.motors[jointName] = MOTOR(jointName)
 
-    def Act(self):
+    def Act(self, robotId, timestep):
         for motor in self.motors.values():
-            motor.Set_Value()
+            motor.Set_Value(robotId, timestep)
