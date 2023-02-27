@@ -1,5 +1,6 @@
 import pybullet as p
 import pyrosim.pyrosim as pyrosim
+from pyrosim.neuralNetwork import NEURAL_NETWORK
 
 from sensor import SENSOR
 from motor import MOTOR
@@ -11,6 +12,7 @@ class ROBOT:
         pyrosim.Prepare_To_Simulate(self.robotId)
 
         self.Prepare_To_Sense()
+        self.nn = NEURAL_NETWORK("brain.nndf")
         self.Prepare_To_Act()
 
     def Prepare_To_Sense(self):
@@ -21,6 +23,9 @@ class ROBOT:
     def Sense(self, timestep):
         for sensor in self.sensors.values():
             sensor.Get_Value(timestep)
+
+    def Think(self):
+        self.nn.Print()
 
     def Prepare_To_Act(self):
         self.motors = {}

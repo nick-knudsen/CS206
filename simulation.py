@@ -24,6 +24,7 @@ class SIMULATION:
             #print(timestep)
             p.stepSimulation()
             self.robot.Sense(timestep)
+            self.robot.Think()
             self.robot.Act(self.robot.robotId, timestep)
             time.sleep(0.01)
     

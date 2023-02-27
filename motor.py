@@ -17,7 +17,6 @@ class MOTOR:
 
         print(self.jointName)
         if self.jointName == b'Torso_BackLeg':
-            print("test")
             self.frequency = 2*self.frequency
         self.motorValues = self.amplitude*np.sin(np.linspace(0+self.offset,2*pi*self.frequency+self.offset, c.SIMULATION_STEPS))
         
