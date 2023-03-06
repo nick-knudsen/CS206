@@ -72,6 +72,7 @@ class NEURON:
         for synapse in synapses.keys():
             if (self.Get_Name() == synapse[1]):
                 self.Allow_Presynaptic_Neuron_To_Influence_Me(synapses[synapse].Get_Weight(), neurons[synapse[0]].Get_Value())
+        self.Threshold()
 
     def Update_Sensor_Neuron(self):
 
