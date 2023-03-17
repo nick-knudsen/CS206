@@ -11,19 +11,27 @@ class SOLUTION:
         self.Create_World()
         self.Create_Body()
         self.Create_Brain()
+        
         os.system("python simulate.py")
+        
+        fitnessFile = open("fitness.txt", "r")
+        fitness = float(fitnessFile.read())
+        fitnessFile.close()
 
     def Create_World(self):
         pyrosim.Start_SDF("world.sdf")
+        
         [length, width, height] = [1,1,1]
         [x,y,z] = [-3,3,0.5]
         pyrosim.Send_Cube(name="Box", pos=[x,y,z] , size=[length, width, height])
+        
         pyrosim.End()
 
         return
 
     def Create_Body(self):
         pyrosim.Start_URDF("body.urdf")
+        
         [length, width, height] = [1,1,1]
         [x,y,z] = [1.5,0,1.5]
         pyrosim.Send_Cube(name="Torso", pos=[x,y,z], size=[length, width, height])
@@ -31,6 +39,7 @@ class SOLUTION:
         pyrosim.Send_Cube(name="BackLeg", pos=[-0.5,0,-0.5], size=[length, width, height])
         pyrosim.Send_Joint(name="Torso_FrontLeg", parent="Torso", child="FrontLeg", type="revolute", position=[2,0,1])
         pyrosim.Send_Cube(name="FrontLeg", pos=[0.5,0,-0.5], size=[length, width, height])
+        
         pyrosim.End()
 
     def Create_Brain(self):
