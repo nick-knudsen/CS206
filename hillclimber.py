@@ -17,13 +17,18 @@ class HILLCLIMBER:
         self.Spawn()
         self.Mutate()
         self.child.Evaluate()
+        self.Print()
         self.Select()
 
     def Spawn(self):
         self.child = copy.deepcopy(self.parent)
 
     def Mutate(self):
-        pass
+        self.child.Mutate()
 
     def Select(self):
-        pass
+        if (self.child.fitness > self.parent.fitness):
+            self.parent = self.child
+
+    def Print(self):
+        print("\nParent Fitness: ", self.parent.fitness, "\tChild Fitness: ", self.child.fitness)
