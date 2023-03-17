@@ -9,6 +9,7 @@ import constants as c
 
 class SIMULATION:
     def __init__(self, directOrGUI):
+        self.directOrGUI = directOrGUI
         if directOrGUI == "DIRECT":
             self.physicsClient = p.connect(p.DIRECT)
         if directOrGUI == "GUI":
@@ -27,6 +28,8 @@ class SIMULATION:
             self.robot.Sense(timestep)
             self.robot.Think()
             self.robot.Act(self.robot.robotId, timestep)
+            if self.directOrGUI == "GUI":
+                time.sleep(0.005)
     
     def Get_Fitness(self):
         self.robot.Get_Fitness()

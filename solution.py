@@ -14,12 +14,12 @@ class SOLUTION:
         
         self.weights[row, col] = 2*random.random()-1
 
-    def Evaluate(self):
+    def Evaluate(self, DirectOrGUI):
         self.Create_World()
         self.Create_Body()
         self.Create_Brain()
         
-        os.system("python simulate.py")
+        os.system("python simulate.py " + DirectOrGUI)
         
         fitnessFile = open("fitness.txt", "r")
         self.fitness = float(fitnessFile.read())
