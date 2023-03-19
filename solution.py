@@ -5,9 +5,13 @@ import os
 
 class SOLUTION:
 
-    def __init__(self):
+    def __init__(self, ID):
         self.weights = 2*np.random.rand(3,2)-1
+        self.myID = ID
 
+    def Set_ID(self, ID):
+        self.myID = ID
+        
     def Mutate(self):
         row = random.randint(0,2)
         col = random.randint(0,1)
@@ -19,7 +23,7 @@ class SOLUTION:
         self.Create_Body()
         self.Create_Brain()
         
-        os.system("python simulate.py " + DirectOrGUI)
+        os.system("start /B python simulate.py " + DirectOrGUI)
         
         fitnessFile = open("fitness.txt", "r")
         self.fitness = float(fitnessFile.read())
