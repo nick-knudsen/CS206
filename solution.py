@@ -11,7 +11,7 @@ class SOLUTION:
 
     def Set_ID(self, ID):
         self.myID = ID
-        
+
     def Mutate(self):
         row = random.randint(0,2)
         col = random.randint(0,1)
@@ -54,7 +54,7 @@ class SOLUTION:
         pyrosim.End()
 
     def Create_Brain(self):
-        pyrosim.Start_NeuralNetwork("brain.nndf")
+        pyrosim.Start_NeuralNetwork("brain" + self.myID + ".nndf")
 
         pyrosim.Send_Sensor_Neuron(name=0, linkName="Torso")
         pyrosim.Send_Sensor_Neuron(name=1, linkName="BackLeg")
