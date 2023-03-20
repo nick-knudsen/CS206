@@ -23,7 +23,7 @@ class SOLUTION:
         self.Create_Body()
         self.Create_Brain()
         
-        os.system("start /B python simulate.py " + DirectOrGUI)
+        os.system("start /B python simulate.py " + DirectOrGUI + " " + str(self.myID))
         
         fitnessFile = open("fitness.txt", "r")
         self.fitness = float(fitnessFile.read())
