@@ -7,8 +7,8 @@ from motor import MOTOR
 
 
 class ROBOT:
-    def __init__(self):
-        self.robotId = p.loadURDF("body.urdf")
+    def __init__(self, solutionID):
+        self.robotId = p.loadURDF("body" + str(solutionID) + ".urdf")
         pyrosim.Prepare_To_Simulate(self.robotId)
 
         self.Prepare_To_Sense()
