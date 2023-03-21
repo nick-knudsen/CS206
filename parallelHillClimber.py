@@ -15,8 +15,11 @@ class PARALLEL_HILLCLIMBER:
     def Evolve(self):
         
         for individual in self.parents.values():
-            individual.Evaluate("GUI")
+            individual.Start_Simulation("GUI")
 
+        for individual in self.parents.values():
+            individual.Wait_For_Simulation_To_End()
+            print(individual.fitness)
         # for currentGeneration in range(c.numberOfGenerations):
         #     self.Evolve_For_One_Generation()
 

@@ -2,6 +2,7 @@ import numpy as np
 import pyrosim.pyrosim as pyrosim
 import random
 import os
+import time
 
 class SOLUTION:
 
@@ -18,19 +19,21 @@ class SOLUTION:
         
         self.weights[row, col] = 2*random.random()-1
 
-    def Evaluate(self, DirectOrGUI):
+    def Start_Simulation(self, DirectOrGUI):
         self.Create_World()
         self.Create_Body()
         self.Create_Brain()
         
         os.system("start /B python simulate.py " + DirectOrGUI + " " + str(self.myID))
-        
+    
+    def Wait_For_Simulation_To_End(self): 
         fitnessFileName = "fitness" + str(self.myID) + ".txt"
         while not os.path.exists(fitnessFileName):
             time.sleep(0.01)
         fitnessFile = open(fitnessFileName, "r")
         self.fitness = float(fitnessFile.read())
         fitnessFile.close()
+        os.system("del" + fitnessFileName)
 
     def Create_World(self):
         pyrosim.Start_SDF("world.sdf")
