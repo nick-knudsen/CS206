@@ -11,4 +11,4 @@ FREQUENCY_BACK = 20
 PHASE_OFFSET_BACK = 0
 
 numberOfGenerations = 30
-populationSize = 2
+populationSize = 10
