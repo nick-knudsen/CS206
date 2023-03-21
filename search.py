@@ -6,4 +6,4 @@ from parallelHillClimber import PARALLEL_HILLCLIMBER
 #     os.system("python simulate.py")
 phc = PARALLEL_HILLCLIMBER()
 phc.Evolve()
-phc.Show_Best()
+#phc.Show_Best()

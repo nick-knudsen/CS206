@@ -19,7 +19,6 @@ class PARALLEL_HILLCLIMBER:
 
         # for currentGeneration in range(c.numberOfGenerations):
         #     self.Evolve_For_One_Generation()
-        pass
 
     def Show_Best(self):
         #self.parent.Evaluate("GUI")

@@ -25,7 +25,10 @@ class SOLUTION:
         
         os.system("start /B python simulate.py " + DirectOrGUI + " " + str(self.myID))
         
-        fitnessFile = open("fitness.txt", "r")
+        fitnessFileName = "fitness" + str(self.myID) + ".txt"
+        while not os.path.exists(fitnessFileName):
+            time.sleep(0.01)
+        fitnessFile = open(fitnessFileName, "r")
         self.fitness = float(fitnessFile.read())
         fitnessFile.close()
 
