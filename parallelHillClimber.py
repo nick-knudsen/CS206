@@ -1,10 +1,15 @@
 from solution import SOLUTION
 import constants as c
 import copy
+import os
 
 class PARALLEL_HILLCLIMBER:
 
     def __init__(self):
+        os.system("del brain*.nndf")
+        os.system("del tmp*.txt")
+        os.system("del fitness*.txt")
+
         self.parents = {}
         self.nextAvailableID = 0
 
@@ -13,15 +18,8 @@ class PARALLEL_HILLCLIMBER:
             self.nextAvailableID += 1
 
     def Evolve(self):
-        
-        for individual in self.parents.values():
-            individual.Start_Simulation("DIRECT")
-
-        for individual in self.parents.values():
-            individual.Wait_For_Simulation_To_End()
-            print(individual.fitness)
-        # for currentGeneration in range(c.numberOfGenerations):
-        #     self.Evolve_For_One_Generation()
+        for currentGeneration in range(c.numberOfGenerations):
+             self.Evolve_For_One_Generation()
 
     def Show_Best(self):
         #self.parent.Evaluate("GUI")
@@ -30,17 +28,28 @@ class PARALLEL_HILLCLIMBER:
     def Evolve_For_One_Generation(self):
         self.Spawn()
         self.Mutate()
-        self.child.Evaluate("DIRECT")
-        self.Print()
-        self.Select()
+        # self.child.Evaluate("DIRECT")
+        # self.Print()
+        # self.Select()
 
     def Spawn(self):
-        self.child = copy.deepcopy(self.parent)
-        self.child.Set_ID(self.nextAvailableID)
-        self.nextAvailableID += 1
+        self.children = {}
+
+        for i in self.parents.keys():
+            self.children[i] = copy.deepcopy(self.parents[i])
+            self.children[i].Set_ID(self.nextAvailableID)
+            self.nextAvailableID += 1
 
     def Mutate(self):
-        self.child.Mutate()
+        for child in self.children.values():
+            child.Mutate()
+
+    def Evaluate(self, solutions):
+        for individual in solutions.values():
+            individual.Start_Simulation("DIRECT")
+
+        for individual in solutions.values():
+            individual.Wait_For_Simulation_To_End()
 
     def Select(self):
         if (self.child.fitness < self.parent.fitness):
