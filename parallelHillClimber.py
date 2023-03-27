@@ -18,6 +18,7 @@ class PARALLEL_HILLCLIMBER:
             self.nextAvailableID += 1
 
     def Evolve(self):
+        self.Evaluate(self.parents)
         for currentGeneration in range(c.numberOfGenerations):
              self.Evolve_For_One_Generation()
 
@@ -28,8 +29,8 @@ class PARALLEL_HILLCLIMBER:
     def Evolve_For_One_Generation(self):
         self.Spawn()
         self.Mutate()
-        # self.child.Evaluate("DIRECT")
-        # self.Print()
+        self.Evaluate(self.children)
+        self.Print()
         # self.Select()
 
     def Spawn(self):
@@ -56,4 +57,7 @@ class PARALLEL_HILLCLIMBER:
             self.parent = self.child
 
     def Print(self):
-        print("\nParent Fitness: ", self.parent.fitness, "\tChild Fitness: ", self.child.fitness)
+        print("\n")
+        for key in self.parents.keys():
+            print("Parent Fitness: ", self.parents[key].fitness, "\tChild Fitness: ", self.children[key].fitness)
+        print("\n")

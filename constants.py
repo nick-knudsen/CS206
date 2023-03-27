@@ -10,5 +10,5 @@ AMPLITUDE_BACK = pi/16
 FREQUENCY_BACK = 20
 PHASE_OFFSET_BACK = 0
 
-numberOfGenerations = 30
+numberOfGenerations = 2
 populationSize = 2
