@@ -23,7 +23,12 @@ class PARALLEL_HILLCLIMBER:
              self.Evolve_For_One_Generation()
 
     def Show_Best(self):
-        #self.parent.Evaluate("GUI")
+        minFitness = 10000
+        for key in self.parents.keys():
+            if self.parents[key].fitness < minFitness:
+                minFitness = self.parents[key].fitness
+                bestParent = self.parents[key]
+        bestParent.Start_Simulation("GUI")
         pass
 
     def Evolve_For_One_Generation(self):
