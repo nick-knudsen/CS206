@@ -10,8 +10,8 @@ AMPLITUDE_BACK = pi/16
 FREQUENCY_BACK = 20
 PHASE_OFFSET_BACK = 0
 
-numberOfGenerations = 1
-populationSize = 2
+numberOfGenerations = 10
+populationSize = 10
 
 numSensorNeurons = 4
 numMotorNeurons = 8
