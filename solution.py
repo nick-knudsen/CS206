@@ -9,7 +9,7 @@ import constants as c
 class SOLUTION:
 
     def __init__(self, ID):
-        self.weights = 2*np.random.rand(c.numSensorNeurons, c.numMotorNeurons)-1
+        self.weights = 2*np.random.rand(c.numSensorNeurons+1, c.numMotorNeurons)-1
         self.myID = ID
 
     def Set_ID(self, ID):
@@ -79,7 +79,7 @@ class SOLUTION:
         pyrosim.Send_Sensor_Neuron(name=1, linkName="FrontLowerLeg")
         pyrosim.Send_Sensor_Neuron(name=2, linkName="LeftLowerLeg")
         pyrosim.Send_Sensor_Neuron(name=3, linkName="RightLowerLeg")
-        
+
         pyrosim.Send_CPG_Neuron(name=4)
 
         pyrosim.Send_Motor_Neuron(name=5, jointName="Torso_BackLeg")
@@ -93,6 +93,6 @@ class SOLUTION:
 
         for currentRow in range(c.numSensorNeurons+1):
             for currentColumn in range(c.numMotorNeurons):
-                pyrosim.Send_Synapse(sourceNeuronName=currentRow, targetNeuronName=currentColumn+c.numSensorNeurons, weight=self.weights[currentRow][currentColumn])
+                pyrosim.Send_Synapse(sourceNeuronName=currentRow, targetNeuronName=currentColumn+c.numSensorNeurons+1, weight=self.weights[currentRow][currentColumn])
 
         pyrosim.End()
