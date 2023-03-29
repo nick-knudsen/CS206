@@ -18,4 +18,4 @@ numMotorNeurons = 8
 
 motorJointRange = 0.2
 
-CPG_FREQUENCY = 1
+CPG_FREQUENCY = 0.4
