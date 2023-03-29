@@ -29,8 +29,8 @@ class ROBOT:
         for sensor in self.sensors.values():
             sensor.Get_Value(timestep)
 
-    def Think(self):
-        self.nn.Update()
+    def Think(self, timestep):
+        self.nn.Update(timestep, c.CPG_FREQUENCY)
 
     def Prepare_To_Act(self):
         self.motors = {}

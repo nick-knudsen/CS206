@@ -26,7 +26,7 @@ class SIMULATION:
         for timestep in range(c.SIMULATION_STEPS):
             p.stepSimulation()
             self.robot.Sense(timestep)
-            self.robot.Think()
+            self.robot.Think(timestep)
             self.robot.Act(self.robot.robotId, timestep)
             if self.directOrGUI == "GUI":
                 time.sleep(0.001)
