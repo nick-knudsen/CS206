@@ -148,6 +148,10 @@ def Send_Sensor_Neuron(name,linkName):
 
     f.write('    <neuron name = "' + str(name) + '" type = "sensor" linkName = "' + linkName + '" />\n')
 
+def Send_CPG_Neuron(name):
+
+    f.write('    <neuron name = "' + str(name) + '" type = "cpg" />\n')
+
 def Send_Synapse( sourceNeuronName , targetNeuronName , weight ):
 
     f.write('    <synapse sourceNeuronName = "' + str(sourceNeuronName) + '" targetNeuronName = "' + str(targetNeuronName) + '" weight = "' + str(weight) + '" />\n')
