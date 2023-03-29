@@ -102,6 +102,10 @@ class NEURON:
 
             self.type = c.MOTOR_NEURON
 
+        elif "cpg" in line:
+
+            self.type = c.CPG_NEURON
+            
         else:
 
             self.type = c.HIDDEN_NEURON
