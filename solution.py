@@ -16,8 +16,8 @@ class SOLUTION:
         self.myID = ID
 
     def Mutate(self):
-        row = random.randint(0,2)
-        col = random.randint(0,1)
+        row = random.randint(0,c.numSensorNeurons-1)
+        col = random.randint(0,c.numMotorNeurons-1)
         
         self.weights[row, col] = 2*random.random()-1
 
