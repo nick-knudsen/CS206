@@ -47,6 +47,10 @@ class NEURON:
     def Is_Hidden_Neuron(self):
 
         return self.type == c.HIDDEN_NEURON
+    
+    def Is_CPG_Neuron(self):
+
+        return self.type == c.CPG_NEURON
 
     def Is_Motor_Neuron(self):
 
@@ -73,6 +77,10 @@ class NEURON:
             if (self.Get_Name() == synapse[1]):
                 self.Allow_Presynaptic_Neuron_To_Influence_Me(synapses[synapse].Get_Weight(), neurons[synapse[0]].Get_Value())
         self.Threshold()
+    
+    def Update_CPG_Neuron(self, timestep, frequency):
+
+        self.Set_Value(math.sin(frequency*timestep))
 
     def Update_Sensor_Neuron(self):
 
