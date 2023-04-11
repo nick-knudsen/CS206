@@ -1,5 +1,7 @@
 import math
 
+from scipy import signal
+
 import pybullet
 
 import pyrosim.pyrosim as pyrosim
@@ -78,9 +80,14 @@ class NEURON:
                 self.Allow_Presynaptic_Neuron_To_Influence_Me(synapses[synapse].Get_Weight(), neurons[synapse[0]].Get_Value())
         self.Threshold()
     
-    def Update_CPG_Neuron(self, timestep, frequency):
+    def Update_CPG_Neuron(self, timestep, frequency, type):
 
-        self.Set_Value(math.sin(frequency*timestep))
+        if type == 1: # sinusoidal
+            self.Set_Value(math.sin(frequency*timestep))
+        elif type == 2: # square wave
+            timesteps = [0: c.SIMULATION_STEPS]
+            waveform = signal.square(timesteps)
+            self.Set_Value(waveform[timestep])
 
     def Update_Sensor_Neuron(self):
 
