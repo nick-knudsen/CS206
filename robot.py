@@ -30,8 +30,8 @@ class ROBOT:
         for sensor in self.sensors.values():
             sensor.Get_Value(timestep)
 
-    def Think(self, timestep):
-        self.nn.Update(timestep, c.CPG_FREQUENCY)
+    def Think(self, timestep, wavetype):
+        self.nn.Update(timestep, c.CPG_FREQUENCY, wavetype)
 
     def Prepare_To_Act(self):
         self.motors = {}

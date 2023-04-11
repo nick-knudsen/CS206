@@ -28,13 +28,13 @@ class NEURAL_NETWORK:
 
         print("")
 
-    def Update(self, timestep, frequency):
+    def Update(self, timestep, frequency, wavetype):
         
         for neuronName in self.neurons.keys():
             if self.neurons[neuronName].Is_Sensor_Neuron():
                 self.neurons[neuronName].Update_Sensor_Neuron()
             elif self.neurons[neuronName].Is_CPG_Neuron():
-                self.neurons[neuronName].Update_CPG_Neuron(timestep, frequency)
+                self.neurons[neuronName].Update_CPG_Neuron(timestep, frequency, wavetype)
             else:
                 self.neurons[neuronName].Update_Hidden_Or_Motor_Neuron(self.neurons, self.synapses)
 

@@ -8,6 +8,7 @@ import pyrosim.pyrosim as pyrosim
 
 import pyrosim.constants as c
 
+
 class NEURON: 
 
     def __init__(self,line):
@@ -85,9 +86,13 @@ class NEURON:
         if type == 1: # sinusoidal
             self.Set_Value(math.sin(frequency*timestep))
         elif type == 2: # square wave
-            timesteps = [0: c.SIMULATION_STEPS]
+            timesteps = range(1000)
             waveform = signal.square(timesteps)
-            self.Set_Value(waveform[timestep])
+            self.Set_Value(waveform[round(frequency*timestep)])
+        elif type == 3: # sawtooth wave
+            timesteps = range(1000)
+            waveform = signal.sawtooth(timesteps)
+            self.Set_Value(waveform[round(frequency*timestep)])
 
     def Update_Sensor_Neuron(self):
 
