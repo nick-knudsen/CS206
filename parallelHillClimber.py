@@ -2,6 +2,7 @@ from solution import SOLUTION
 import constants as c
 import copy
 import os
+import numpy as np
 
 class PARALLEL_HILLCLIMBER:
 
@@ -12,15 +13,17 @@ class PARALLEL_HILLCLIMBER:
 
         self.parents = {}
         self.nextAvailableID = 0
+        self.fitnessVals = np.empty((c.populationSize, c.numberOfGenerations))
 
         for i in range(c.populationSize):
             self.parents[i] = SOLUTION(self.nextAvailableID)
             self.nextAvailableID += 1
 
     def Evolve(self):
-        self.Evaluate(self.parents)
-        for currentGeneration in range(c.numberOfGenerations):
-             self.Evolve_For_One_Generation()
+        self.Evaluate(self.parents, 0)
+        for currentGeneration in range(1, c.numberOfGenerations):
+             self.Evolve_For_One_Generation(currentGeneration)
+        np.save("data/fitnessVals.npy", self.fitnessVals)
 
     def Show_Best(self):
         minFitness = 10000
@@ -31,11 +34,11 @@ class PARALLEL_HILLCLIMBER:
         bestParent.Start_Simulation("GUI")
         pass
 
-    def Evolve_For_One_Generation(self):
+    def Evolve_For_One_Generation(self, currGen):
         self.Spawn()
         self.Mutate()
-        self.Evaluate(self.children)
-        self.Print()
+        self.Evaluate(self.children, currGen)
+        self.Print(currGen)
         self.Select()
 
     def Spawn(self):
@@ -50,12 +53,14 @@ class PARALLEL_HILLCLIMBER:
         for child in self.children.values():
             child.Mutate()
 
-    def Evaluate(self, solutions):
+    def Evaluate(self, solutions, currGen):
         for individual in solutions.values():
             individual.Start_Simulation("DIRECT")
 
         for individual in solutions.values():
             individual.Wait_For_Simulation_To_End()
+            genID = individual.myID - c.populationSize*currGen
+            self.fitnessVals[genID][currGen] = round(individual.fitness, 4)
 
     def Select(self):
         mostFitness = 1000
@@ -69,8 +74,7 @@ class PARALLEL_HILLCLIMBER:
         for key in self.parents.keys():   
                 self.parents[key] = mostFit
 
-    def Print(self):
+    def Print(self, currGen):
         print("\n")
-        for key in self.parents.keys():
-            print("Parent Fitness: ", self.parents[key].fitness, "\tChild Fitness: ", self.children[key].fitness)
+        print(currGen+1, "/", c.numberOfGenerations, " Generations")
         print("\n")

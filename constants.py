@@ -1,6 +1,6 @@
 from math import pi
 
-# constants
+
 SIMULATION_STEPS = 1000
 
 AMPLITUDE_FRONT = pi/16
@@ -18,5 +18,13 @@ numMotorNeurons = 8
 
 motorJointRange = 0.2
 
-CPG_FREQUENCY = 0.2 # 0.075 for Sine
-CPG_WAVE_TYPE = 2 # 1: Sinusoidal, 2: Square, 3: Sawtooth
+CPG_FREQUENCY = 0
+CPG_WAVE_TYPE = 0
+
+def setFreq(freq):
+    global CPG_FREQUENCY
+    CPG_FREQUENCY = freq
+    
+def setWaveType(waveType):
+    global CPG_WAVE_TYPE # 1: Sinusoidal, 2: Square, 3: Sawtooth
+    CPG_WAVE_TYPE = waveType
