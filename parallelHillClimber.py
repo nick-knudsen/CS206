@@ -7,7 +7,7 @@ import numpy as np
 class PARALLEL_HILLCLIMBER:
 
     def __init__(self, waveType, freq):
-        os.system("del brain*.nndf")
+        #os.system("del brain*.nndf")
         os.system("del tmp*.txt")
         os.system("del fitness*.txt")
 
