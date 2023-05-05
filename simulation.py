@@ -1,6 +1,7 @@
 import pybullet as p
 import pybullet_data
 import time
+import numpy as np
 
 from world import WORLD
 from robot import ROBOT
@@ -30,7 +31,10 @@ class SIMULATION:
             self.robot.Act(self.robot.robotId, timestep)
             if self.directOrGUI == "GUI":
                 time.sleep(0.001)
-    
+
+        cpgVals = self.robot.cpgVals
+        np.save("data/cpgNeuronVals_" + str(c.CPG_WAVE_TYPE), cpgVals)
+        exit()
     def Get_Fitness(self):
         self.robot.Get_Fitness()
 

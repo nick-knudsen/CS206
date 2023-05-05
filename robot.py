@@ -1,6 +1,7 @@
 import pybullet as p
 import pyrosim.pyrosim as pyrosim
 from pyrosim.neuralNetwork import NEURAL_NETWORK
+import numpy as np
 
 import os
 from math import sqrt
@@ -14,6 +15,7 @@ class ROBOT:
     def __init__(self, solutionID):
         self.myID = str(solutionID)
         self.robotId = p.loadURDF("body.urdf")
+        self.cpgVals = np.zeros(c.SIMULATION_STEPS)
         pyrosim.Prepare_To_Simulate(self.robotId)
 
         self.Prepare_To_Sense()
@@ -32,6 +34,8 @@ class ROBOT:
 
     def Think(self, timestep, wavetype):
         self.nn.Update(timestep, c.CPG_FREQUENCY, wavetype)
+        cpgVal = self.nn.Get_Value_Of("4")
+        self.cpgVals[timestep] = cpgVal
 
     def Prepare_To_Act(self):
         self.motors = {}

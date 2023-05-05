@@ -1,5 +1,5 @@
 import math
-
+import numpy as np
 from scipy import signal
 
 import pybullet
@@ -7,7 +7,7 @@ import pybullet
 import pyrosim.pyrosim as pyrosim
 
 import pyrosim.constants as c
-
+from constants import SIMULATION_STEPS
 
 class NEURON: 
 
@@ -86,13 +86,13 @@ class NEURON:
         if type == 1: # sinusoidal
             self.Set_Value(math.sin(frequency*timestep))
         elif type == 2: # square wave
-            timesteps = range(1000)
+            timesteps = range(SIMULATION_STEPS)
             waveform = signal.square(timesteps)
             self.Set_Value(waveform[round(frequency*timestep)])
         elif type == 3: # sawtooth wave
-            timesteps = range(1000)
-            waveform = signal.sawtooth(timesteps)
-            self.Set_Value(waveform[round(frequency*timestep)])
+            timesteps = np.linspace(0, SIMULATION_STEPS, SIMULATION_STEPS)
+            waveform = signal.sawtooth(frequency*timesteps)
+            self.Set_Value(waveform[timestep])
 
     def Update_Sensor_Neuron(self):
 
