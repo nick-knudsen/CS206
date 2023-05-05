@@ -32,8 +32,8 @@ class ROBOT:
         for sensor in self.sensors.values():
             sensor.Get_Value(timestep)
 
-    def Think(self, timestep, wavetype):
-        self.nn.Update(timestep, c.CPG_FREQUENCY, wavetype)
+    def Think(self, timestep, freq, wavetype):
+        self.nn.Update(timestep, freq, wavetype)
         cpgVal = self.nn.Get_Value_Of("4")
         self.cpgVals[timestep] = cpgVal
 

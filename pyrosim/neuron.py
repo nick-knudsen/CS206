@@ -93,6 +93,9 @@ class NEURON:
             timesteps = np.linspace(0, SIMULATION_STEPS, SIMULATION_STEPS)
             waveform = signal.sawtooth(frequency*timesteps)
             self.Set_Value(waveform[timestep])
+        else:
+            print("\nInvalid Neuron Type!")
+            exit()
 
     def Update_Sensor_Neuron(self):
 

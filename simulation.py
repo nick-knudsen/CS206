@@ -9,7 +9,7 @@ import constants as c
 
 
 class SIMULATION:
-    def __init__(self, directOrGUI, solutionID):
+    def __init__(self, directOrGUI, solutionID, waveType, freq):
         self.directOrGUI = directOrGUI
         if directOrGUI == "DIRECT":
             self.physicsClient = p.connect(p.DIRECT)
@@ -22,19 +22,22 @@ class SIMULATION:
         self.world = WORLD()
         self.robot = ROBOT(solutionID)
 
+        self.waveType = waveType
+        self.freq = freq
+
     def Run(self):
         # # simulation stepper
         for timestep in range(c.SIMULATION_STEPS):
             p.stepSimulation()
             self.robot.Sense(timestep)
-            self.robot.Think(timestep, wavetype = c.CPG_WAVE_TYPE)
+            self.robot.Think(timestep, self.freq, self.waveType)
             self.robot.Act(self.robot.robotId, timestep)
             if self.directOrGUI == "GUI":
                 time.sleep(0.001)
 
         cpgVals = self.robot.cpgVals
-        np.save("data/cpgNeuronVals_" + str(c.CPG_WAVE_TYPE), cpgVals)
-        
+        np.save("data/cpgNeuronVals_" + str(self.waveType), cpgVals)
+
     def Get_Fitness(self):
         self.robot.Get_Fitness()
 

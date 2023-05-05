@@ -8,9 +8,11 @@ import constants as c
 
 class SOLUTION:
 
-    def __init__(self, ID):
+    def __init__(self, ID, waveType, freq):
         self.weights = 2*np.random.rand(c.numSensorNeurons+1, c.numMotorNeurons)-1
         self.myID = ID
+        self.waveType = waveType
+        self.freq = freq
 
     def Set_ID(self, ID):
         self.myID = ID
@@ -26,7 +28,7 @@ class SOLUTION:
         self.Create_Body()
         self.Create_Brain()
         
-        os.system("start /B python simulate.py " + DirectOrGUI + " " + str(self.myID))
+        os.system("start /B python simulate.py " + DirectOrGUI + " " + str(self.myID) + " " + str(self.waveType) + " " + str(self.freq))
     
     def Wait_For_Simulation_To_End(self): 
         fitnessFileName = "fitness" + str(self.myID) + ".txt"

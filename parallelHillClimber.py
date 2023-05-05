@@ -6,24 +6,28 @@ import numpy as np
 
 class PARALLEL_HILLCLIMBER:
 
-    def __init__(self):
+    def __init__(self, waveType, freq):
         os.system("del brain*.nndf")
         os.system("del tmp*.txt")
         os.system("del fitness*.txt")
+
+        self.waveType = waveType
+        self.freq = freq
 
         self.parents = {}
         self.nextAvailableID = 0
         self.fitnessVals = np.empty((c.populationSize, c.numberOfGenerations))
 
         for i in range(c.populationSize):
-            self.parents[i] = SOLUTION(self.nextAvailableID)
+            self.parents[i] = SOLUTION(self.nextAvailableID, self.waveType, self.freq)
             self.nextAvailableID += 1
 
     def Evolve(self):
         self.Evaluate(self.parents, 0)
         for currentGeneration in range(1, c.numberOfGenerations):
              self.Evolve_For_One_Generation(currentGeneration)
-        np.save("data/fitnessVals.npy", self.fitnessVals)
+        filename = "data/fitnessVals_" + str(self.waveType) + "_" + str(self.freq) + ".npy"
+        np.save(filename, self.fitnessVals)
 
     def Show_Best(self):
         minFitness = 10000
