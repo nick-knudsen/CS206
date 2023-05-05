@@ -18,5 +18,5 @@ numMotorNeurons = 8
 
 motorJointRange = 0.2
 
-CPG_FREQUENCY = 0.1
-CPG_WAVE_TYPE = 3 # 1: Sinusoidal, 2: Square, 3: Sawtooth
+CPG_FREQUENCY = 0.075 # 0.075 for Sine
+CPG_WAVE_TYPE = 1 # 1: Sinusoidal, 2: Square, 3: Sawtooth

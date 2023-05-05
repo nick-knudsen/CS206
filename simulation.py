@@ -34,7 +34,7 @@ class SIMULATION:
 
         cpgVals = self.robot.cpgVals
         np.save("data/cpgNeuronVals_" + str(c.CPG_WAVE_TYPE), cpgVals)
-        exit()
+        
     def Get_Fitness(self):
         self.robot.Get_Fitness()
 

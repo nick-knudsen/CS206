@@ -58,9 +58,16 @@ class PARALLEL_HILLCLIMBER:
             individual.Wait_For_Simulation_To_End()
 
     def Select(self):
+        mostFitness = 1000
         for key in self.parents.keys():
-            if (self.children[key].fitness < self.parents[key].fitness):
-                self.parents[key] = self.children[key]
+            if self.parents[key].fitness < mostFitness:
+                mostFitness = self.parents[key].fitness
+                mostFit = self.parents[key]
+            if self.children[key].fitness < mostFitness:
+                mostFitness = self.children[key].fitness
+                mostFit = self.children[key]
+        for key in self.parents.keys():   
+                self.parents[key] = mostFit
 
     def Print(self):
         print("\n")
