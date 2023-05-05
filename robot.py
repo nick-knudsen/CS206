@@ -55,7 +55,7 @@ class ROBOT:
         basePosition = basePositionAndOrientation[0]
         xPosition = basePosition[0]
         yPosition = basePosition[1]
-        fitness = xPosition + yPosition
+        fitness = -1*[abs(xPosition) + abs(yPosition)]
         fitnessFile = open("tmp" + self.myID + ".txt", "w")
         fitnessFile.write(str(fitness))
         fitnessFile.close()
