@@ -81,15 +81,16 @@ class NEURON:
                 self.Allow_Presynaptic_Neuron_To_Influence_Me(synapses[synapse].Get_Weight(), neurons[synapse[0]].Get_Value())
         self.Threshold()
     
-    def Update_CPG_Neuron(self, timestep, frequency, type):
-
-        if type == 1: # sinusoidal
+    def Update_CPG_Neuron(self, timestep, frequency, waveType):
+        waveType = int(waveType)
+        frequency = float(frequency)
+        if waveType == 1: # sinusoidal
             self.Set_Value(math.sin(frequency*timestep))
-        elif type == 2: # square wave
+        elif waveType == 2: # square wave
             timesteps = range(SIMULATION_STEPS)
             waveform = signal.square(timesteps)
             self.Set_Value(waveform[round(frequency*timestep)])
-        elif type == 3: # sawtooth wave
+        elif waveType == 3: # sawtooth wave
             timesteps = np.linspace(0, SIMULATION_STEPS, SIMULATION_STEPS)
             waveform = signal.sawtooth(frequency*timesteps)
             self.Set_Value(waveform[timestep])

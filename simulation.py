@@ -25,6 +25,7 @@ class SIMULATION:
         self.waveType = waveType
         self.freq = freq
 
+
     def Run(self):
         # # simulation stepper
         for timestep in range(c.SIMULATION_STEPS):
