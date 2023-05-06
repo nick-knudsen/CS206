@@ -3,15 +3,17 @@ import numpy as np
 
 
 labelKey = ["Sine", "Square", "Sawtooth"]
-colors = 
+colors = ["red", "blue", "black"]
 
 for waveType in range(1,4):
-    for freq in [0.1, 0.2]:
+    for freq, linestyle in zip([0.1, 0.2], ["-",":"]):
         filename = "data/fitnessVals_" + str(waveType) + "_" + str(freq) + ".npy"
         data = np.load(filename)
         data = np.mean(data, axis=0)
-        label = "Mean Fitness for Robot with " + labelKey[waveType-1] + " CPG Neuron and Frequency " + str(freq)
-        plt.plot(data, label = label, ) 
+        label = labelKey[waveType-1] + " with Frequency " + str(freq)
+        plt.plot(data, label=label, color = colors[waveType-1], linestyle = linestyle)
+        plt.ylabel("Mean Fitness")
+        plt.xlabel("Generation")
 
 # targetAnglesFrontLeft = np.load("data/targetAnglesFrontLeft.npy")
 # targetAnglesFrontRight = np.load("data/targetAnglesFrontRight.npy")
