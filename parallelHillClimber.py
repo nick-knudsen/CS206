@@ -29,13 +29,16 @@ class PARALLEL_HILLCLIMBER:
         filename = "data/fitnessVals_" + str(self.waveType) + "_" + str(self.freq) + ".npy"
         np.save(filename, self.fitnessVals)
 
-    def Show_Best(self):
+    def Save_Best(self):
         minFitness = 10000
         for key in self.parents.keys():
             if self.parents[key].fitness < minFitness:
                 minFitness = self.parents[key].fitness
                 bestParent = self.parents[key]
-        bestParent.Start_Simulation("GUI")
+        filename = "bestSolution_" + str(self.waveType) + "_" + str(freq)
+        np.save(filename, bestParent.weights)
+        
+        #
         pass
 
     def Evolve_For_One_Generation(self, currGen):
