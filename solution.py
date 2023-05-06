@@ -9,10 +9,10 @@ import constants as c
 class SOLUTION:
 
     def __init__(self, ID, waveType, freq, weights=None):
-        if weights == None:
-            self.weights = 2*np.random.rand(c.numSensorNeurons+1, c.numMotorNeurons)-1
-        else:
+        if weights.any() != None:
             self.weights = weights
+        else:
+            self.weights = 2*np.random.rand(c.numSensorNeurons+1, c.numMotorNeurons)-1
         self.myID = ID
         self.waveType = waveType
         self.freq = freq

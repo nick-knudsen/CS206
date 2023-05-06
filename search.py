@@ -8,4 +8,4 @@ for waveType in range(1, 4):
         phc = PARALLEL_HILLCLIMBER(waveType, freq)
         phc.Evolve()
         time.sleep(1)
-        #phc.Show_Best()
+        phc.Save_Best()

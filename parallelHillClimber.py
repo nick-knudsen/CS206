@@ -35,11 +35,8 @@ class PARALLEL_HILLCLIMBER:
             if self.parents[key].fitness < minFitness:
                 minFitness = self.parents[key].fitness
                 bestParent = self.parents[key]
-        filename = "bestSolution_" + str(self.waveType) + "_" + str(freq)
+        filename = "data/bestSolution_" + str(self.waveType) + "_" + str(self.freq)
         np.save(filename, bestParent.weights)
-        
-        #
-        pass
 
     def Evolve_For_One_Generation(self, currGen):
         self.Spawn()
