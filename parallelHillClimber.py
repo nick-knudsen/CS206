@@ -13,7 +13,6 @@ class PARALLEL_HILLCLIMBER:
 
         self.restart = restart
         self.gen = gen
-        self.currGen = gen
         self.waveType = waveType
         self.freq = freq
 
@@ -38,15 +37,16 @@ class PARALLEL_HILLCLIMBER:
             self.nextAvailableID += 1
 
     def Evolve(self):
-        self.Evaluate(self.parents, self.gen)
+        self.Evaluate(self.parents, self.gen, save=False)
         try:
+            currGen = self.gen
             for currentGeneration in range(self.gen, c.numberOfGenerations):
-                self.Evolve_For_One_Generation(self.currGen)
-                self.currGen += 1
+                self.Evolve_For_One_Generation(currGen)
+                currGen += 1
                 if currentGeneration == 3:
                     raise Exception("Stopping after 4 gens")
-        except:
-            pass
+        except Exception as exception:
+            print(exception)
         filename = "data/fitnessVals_" + str(self.waveType) + "_" + str(self.freq) + ".npy"
         np.save(filename, self.fitnessVals)
 
@@ -85,13 +85,13 @@ class PARALLEL_HILLCLIMBER:
         for child in self.children.values():
             child.Mutate()
 
-    def Evaluate(self, solutions, currGen):
+    def Evaluate(self, solutions, currGen, save=True):
         for individual in solutions.values():
             individual.Start_Simulation("DIRECT")
 
         for individual in solutions.values():
             individual.Wait_For_Simulation_To_End()
-            genID = individual.myID - c.populationSize*currGen
+            genID = individual.myID - c.populationSize*currGen - 4
             self.fitnessVals[genID][currGen] = round(individual.fitness, 4)
 
     def Select(self):

@@ -11,7 +11,7 @@ FREQUENCY_BACK = 20
 PHASE_OFFSET_BACK = 0
 
 numberOfGenerations = 10
-populationSize = 4
+populationSize = 10
 
 numSensorNeurons = 4
 numMotorNeurons = 8
