@@ -13,6 +13,7 @@ class PARALLEL_HILLCLIMBER:
 
         self.restart = restart
         self.gen = gen
+        self.currGen = gen
         self.waveType = waveType
         self.freq = freq
 
@@ -28,10 +29,10 @@ class PARALLEL_HILLCLIMBER:
 
         for i in range(c.populationSize):
             if restart:
-                filename = "data/gen" + str(self.gen-1) + "Parent_" + str(self.waveType) + "_" + str(self.freq)+".npy"
-                weights = np.load(filename)
+                prefix = "data/"
+                filename = "gen" + str(self.gen-1) + "Parent_" + str(self.waveType) + "_" + str(self.freq)+".npy"
+                weights = np.load(prefix + filename)
                 self.parents[i] = SOLUTION(self.nextAvailableID, waveType, freq, False, weights)
-                os.system("del " + filename)
             else:
                 self.parents[i] = SOLUTION(self.nextAvailableID, self.waveType, self.freq)
             self.nextAvailableID += 1
@@ -40,10 +41,10 @@ class PARALLEL_HILLCLIMBER:
         self.Evaluate(self.parents, self.gen)
         try:
             for currentGeneration in range(self.gen, c.numberOfGenerations):
-                self.Evolve_For_One_Generation(currentGeneration)
-                self.gen += 1
-                # if currentGeneration == 3:
-                #     raise Exception("Stopping after 4 gens")
+                self.Evolve_For_One_Generation(self.currGen)
+                self.currGen += 1
+                if currentGeneration == 3:
+                    raise Exception("Stopping after 4 gens")
         except:
             pass
         filename = "data/fitnessVals_" + str(self.waveType) + "_" + str(self.freq) + ".npy"
