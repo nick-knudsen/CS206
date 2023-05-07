@@ -38,23 +38,21 @@ class PARALLEL_HILLCLIMBER:
 
     def Evolve(self):
         self.Evaluate(self.parents, self.gen, save=False)
-        try:
-            currGen = self.gen
-            for currentGeneration in range(self.gen, c.numberOfGenerations):
-                self.Evolve_For_One_Generation(currGen)
-                currGen += 1
-                if currentGeneration == 3:
-                    raise Exception("Stopping after 4 gens")
-        except Exception as exception:
-            print(exception)
+        # try:
+        currGen = self.gen
+        for currentGeneration in range(self.gen, c.numberOfGenerations):
+            self.Evolve_For_One_Generation(currGen)
+            currGen += 1    
+        # except Exception as exception:
+        #     print(exception)
         filename = "data/fitnessVals_" + str(self.waveType) + "_" + str(self.freq) + ".npy"
         np.save(filename, self.fitnessVals)
 
     def Save_Best(self, filename):
-        minFitness = 10000
+        maxFitness = 0
         for key in self.parents.keys():
-            if self.parents[key].fitness < minFitness:
-                minFitness = self.parents[key].fitness
+            if self.parents[key].fitness > maxFitness:
+                maxFitness = self.parents[key].fitness
                 bestParent = self.parents[key]
         np.save(filename, bestParent.weights)
 
@@ -91,16 +89,16 @@ class PARALLEL_HILLCLIMBER:
 
         for individual in solutions.values():
             individual.Wait_For_Simulation_To_End()
-            genID = individual.myID - c.populationSize*currGen - 4
+            genID = individual.myID - c.populationSize*(currGen+1)
             self.fitnessVals[genID][currGen] = round(individual.fitness, 4)
 
     def Select(self):
-        mostFitness = 1000
+        mostFitness = 0
         for key in self.parents.keys():
-            if self.parents[key].fitness < mostFitness:
+            if self.parents[key].fitness > mostFitness:
                 mostFitness = self.parents[key].fitness
                 mostFit = self.parents[key]
-            if self.children[key].fitness < mostFitness:
+            if self.children[key].fitness > mostFitness:
                 mostFitness = self.children[key].fitness
                 mostFit = self.children[key]
         for key in self.parents.keys():   
