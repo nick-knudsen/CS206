@@ -10,7 +10,7 @@ AMPLITUDE_BACK = pi/16
 FREQUENCY_BACK = 20
 PHASE_OFFSET_BACK = 0
 
-numberOfGenerations = 3
+numberOfGenerations = 10
 populationSize = 4
 
 numSensorNeurons = 4

@@ -6,37 +6,57 @@ import numpy as np
 
 class PARALLEL_HILLCLIMBER:
 
-    def __init__(self, waveType, freq):
-        #os.system("del brain*.nndf")
+    def __init__(self, waveType, freq, restart=False, gen=0):
         os.system("del tmp*.txt")
         os.system("del fitness*.txt")
+        
 
+        self.restart = restart
+        self.gen = gen
         self.waveType = waveType
         self.freq = freq
 
         self.parents = {}
-        self.nextAvailableID = 0
-        self.fitnessVals = np.empty((c.populationSize, c.numberOfGenerations))
+        
+        if restart:
+            filename = "data/fitnessVals_" + str(self.waveType) + "_" + str(self.freq) + ".npy"
+            self.fitnessVals = np.load(filename)
+            self.nextAvailableID = self.gen*c.populationSize
+        else:
+            self.fitnessVals = np.empty((c.populationSize, c.numberOfGenerations))
+            self.nextAvailableID = 0
 
         for i in range(c.populationSize):
-            self.parents[i] = SOLUTION(self.nextAvailableID, self.waveType, self.freq)
+            if restart:
+                filename = "data/gen" + str(self.gen-1) + "Parent_" + str(self.waveType) + "_" + str(self.freq)+".npy"
+                weights = np.load(filename)
+                self.parents[i] = SOLUTION(self.nextAvailableID, waveType, freq, False, weights)
+                os.system("del " + filename)
+            else:
+                self.parents[i] = SOLUTION(self.nextAvailableID, self.waveType, self.freq)
             self.nextAvailableID += 1
 
     def Evolve(self):
-        self.Evaluate(self.parents, 0)
-        for currentGeneration in range(1, c.numberOfGenerations):
-             self.Evolve_For_One_Generation(currentGeneration)
+        self.Evaluate(self.parents, self.gen)
+        try:
+            for currentGeneration in range(self.gen, c.numberOfGenerations):
+                self.Evolve_For_One_Generation(currentGeneration)
+                self.gen += 1
+                # if currentGeneration == 3:
+                #     raise Exception("Stopping after 4 gens")
+        except:
+            pass
         filename = "data/fitnessVals_" + str(self.waveType) + "_" + str(self.freq) + ".npy"
         np.save(filename, self.fitnessVals)
 
-    def Save_Best(self):
+    def Save_Best(self, filename):
         minFitness = 10000
         for key in self.parents.keys():
             if self.parents[key].fitness < minFitness:
                 minFitness = self.parents[key].fitness
                 bestParent = self.parents[key]
-        filename = "data/bestSolution_" + str(self.waveType) + "_" + str(self.freq)
         np.save(filename, bestParent.weights)
+
 
     def Evolve_For_One_Generation(self, currGen):
         self.Spawn()
@@ -44,6 +64,13 @@ class PARALLEL_HILLCLIMBER:
         self.Evaluate(self.children, currGen)
         self.Print(currGen)
         self.Select()
+        path = "gen"
+        suffix = "Parent_" + str(self.waveType) + "_" + str(self.freq) + ".npy"
+        filename =  path + str(currGen) + suffix
+        os.chdir("data")
+        os.system("del " + path + "*" + suffix)
+        os.chdir("..")
+        self.Save_Best("data/" + filename)
 
     def Spawn(self):
         self.children = {}

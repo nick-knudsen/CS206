@@ -5,7 +5,9 @@ import time
 
 for waveType in range(1, 4):
     for freq in [0.1, 0.2]:
-        phc = PARALLEL_HILLCLIMBER(waveType, freq)
+        phc = PARALLEL_HILLCLIMBER(waveType, freq, True, gen=4)
         phc.Evolve()
+            
         time.sleep(1)
-        phc.Save_Best()
+        filename = "data/bestSolution_" + str(waveType) + "_" + str(freq)
+        phc.Save_Best(filename)
