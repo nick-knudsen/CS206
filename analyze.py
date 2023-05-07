@@ -11,7 +11,7 @@ for waveType in range(1,4):
         data = np.load(filename)
         data = np.mean(data, axis=0)
         label = labelKey[waveType-1] + " with Frequency " + str(freq)
-        plt.plot(data, label=label, color = colors[waveType-1], linestyle = linestyle)
+        plt.plot(data, label=label, color = colors[waveType-1], linestyle = linestyle, linewidth = 1)
         plt.ylabel("Mean Fitness")
         plt.xlabel("Generation")
 
