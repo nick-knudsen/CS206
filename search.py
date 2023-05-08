@@ -4,12 +4,12 @@ import constants as c
 import time
 
 for waveType in range(1, 4):
-    for freq in [0.1, 0.2]:
-        phc = PARALLEL_HILLCLIMBER(waveType, freq)
-        if (waveType == 1 and freq == 0.1):
-            phc = PARALLEL_HILLCLIMBER(waveType, freq, True, 89)
-        phc.Evolve()
+#    for freq in [0.1, 0.2]:
+    phc = PARALLEL_HILLCLIMBER(waveType, 0.1)
+#        if (waveType == 1 and freq == 0.1):
+#           phc = PARALLEL_HILLCLIMBER(waveType, freq)
+    phc.Evolve()
         
-        time.sleep(1)
-        filename = "data/bestSolution_" + str(waveType) + "_" + str(freq)
-        phc.Save_Best(filename)
+        # time.sleep(1)
+        # filename = "data/bestSolution_" + str(waveType) + "_" + str(freq)
+        # phc.Save_Best(filename)
