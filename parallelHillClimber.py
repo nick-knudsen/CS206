@@ -42,11 +42,15 @@ class PARALLEL_HILLCLIMBER:
         currGen = self.gen
         for currentGeneration in range(self.gen, c.numberOfGenerations):
             self.Evolve_For_One_Generation(currGen)
-            currGen += 1    
+            currGen += 1
+            os.chdir("data")
+            filename = "fitnessVals_" + str(self.waveType) + "_" + str(self.freq) + ".npy"
+            os.system("del " + filename)
+            np.save(filename, self.fitnessVals)  
+            os.chdir("..")
+            os.system("del fitness*.txt")
         # except Exception as exception:
         #     print(exception)
-        filename = "data/fitnessVals_" + str(self.waveType) + "_" + str(self.freq) + ".npy"
-        np.save(filename, self.fitnessVals)
 
     def Save_Best(self, filename):
         maxFitness = 0

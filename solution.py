@@ -35,8 +35,12 @@ class SOLUTION:
     
     def Wait_For_Simulation_To_End(self): 
         fitnessFileName = "fitness" + str(self.myID) + ".txt"
+        waits = 0
         while not os.path.exists(fitnessFileName):
             time.sleep(0.01)
+            if (waits == 100):
+                fitnessFileName = "fitness" + str(self.myID + 1) + ".txt"
+            waits += 1
         fileOpen = False
         while not fileOpen:
             try:
@@ -47,7 +51,7 @@ class SOLUTION:
                 fileOpen = True
         self.fitness = float(fitnessFile.read())
         fitnessFile.close()
-        os.system("del " + fitnessFileName)
+        #os.system("del " + fitnessFileName)
 
     def Create_World(self):
         pyrosim.Start_SDF("world.sdf")
