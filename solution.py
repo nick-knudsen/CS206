@@ -35,12 +35,14 @@ class SOLUTION:
     
     def Wait_For_Simulation_To_End(self): 
         fitnessFileName = "fitness" + str(self.myID) + ".txt"
-        waits = 0
+        attempts = 0
+        restarted = False
         while not os.path.exists(fitnessFileName):
-            time.sleep(0.01)
-            if (waits == 100):
-                fitnessFileName = "fitness" + str(self.myID + 1) + ".txt"
-            waits += 1
+            time.sleep(0.1)
+            attempts += 1
+            if attempts > 500 and not restarted:
+                self.Start_Simulation("DIRECT")
+                restarted = True
         fileOpen = False
         while not fileOpen:
             try:

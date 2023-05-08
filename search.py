@@ -6,8 +6,8 @@ import time
 for waveType in range(1, 4):
     for freq in [0.1, 0.2]:
         phc = PARALLEL_HILLCLIMBER(waveType, freq)
-        #if (waveType == 1 and freq == 0.1):
-        phc = PARALLEL_HILLCLIMBER(waveType, freq)
+        if (waveType == 1 and freq == 0.1):
+            phc = PARALLEL_HILLCLIMBER(waveType, freq, True, 89)
         phc.Evolve()
         
         time.sleep(1)
