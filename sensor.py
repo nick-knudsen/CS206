@@ -12,5 +12,5 @@ class SENSOR:
     def Get_Value(self, timestep):
         self.values[timestep] = pyrosim.Get_Touch_Sensor_Value_For_Link(self.linkName)
 
-    def Save_Values(self):
-        np.save("data/" + self.linkName + "SensorValues.npy", self.values)
+    def Save_Values(self, waveType, freq):
+        np.save("data/" + self.linkName + "SensorValues_" + waveType + "_" + freq + ".npy", self.values)

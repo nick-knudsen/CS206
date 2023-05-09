@@ -15,6 +15,7 @@ class SIMULATION:
             self.physicsClient = p.connect(p.DIRECT)
         if directOrGUI == "GUI":
             self.physicsClient = p.connect(p.GUI)
+            p.configureDebugVisualizer(p.COV_ENABLE_GUI,0)
         p.setAdditionalSearchPath(pybullet_data.getDataPath())
         # adding gravity
         p.setGravity(0,0,-9.8)
@@ -35,7 +36,13 @@ class SIMULATION:
             self.robot.Act(self.robot.robotId, timestep)
             if self.directOrGUI == "GUI":
                 time.sleep(0.001)
-
+        footsteps = np.zeros((4, c.SIMULATION_STEPS))
+        i = 0
+        for sensor in self.robot.sensors.values():
+            if sensor.linkName in ['BackLowerLeg','FrontLowerLeg','LeftLowerLeg','RightLowerLeg']:
+                footsteps[i] = sensor.values
+                i += 1
+        np.save("data/sensorValues_" + self.waveType + "_" + self.freq + ".npy", footsteps)
         cpgVals = self.robot.cpgVals
         np.save("data/cpgNeuronVals_" + str(self.waveType), cpgVals)
 
